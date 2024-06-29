@@ -6,8 +6,6 @@ import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 import fs from 'fs';
 import path from 'path';
 
-ffmpeg.setFfmpegPath(ffmpegInstaller.path);
-
 // As defined in https://www.w3.org/TR/WCAG/#dfn-contrast-ratio
 function luminanceClamp(colour) {
     if (colour <= 0.04045) {
@@ -102,37 +100,50 @@ export async function extract_contrast(imagePath) {
     }
 }
 
-
-export async function extractFrameBrightness(videoPath, frameOutputPath) {
+export function extractFrames(videoPath, frameOutputPath) {
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
-    let totalBrightness = 0;
-    let frameCount = 0;
 
     return new Promise((resolve, reject) => {
         ffmpeg(videoPath)
-        .outputOptions(['-vf fps=1'])
-        .output(`${frameOutputPath}/%d.png`)
-        .on('end', async function() {
-            let frames = fs.readdirSync(frameOutputPath);
-            let totalBrightness = 0;
-            for (let frame of frames) {
-                const framePath = path.join(frameOutputPath, frame);
-                if (fs.existsSync(framePath)) {
-                    try {
-                        let brightness = await extract_brightness(framePath);
-                        totalBrightness += brightness;
-                        frameCount++;
-                    } catch (error) {
-                        continue;
-                    }
-                } else {
-                    console.error('Missing frame:', framePath);
-                }
-            }
-            let averageBrightness = totalBrightness / frames.length;
-            console.log(`Average Brightness: ${averageBrightness}`);
-            resolve(averageBrightness);
-        })
-        .run();
+            .outputOptions(['-vf fps=1'])  // Extract one frame per second
+            .output(`${frameOutputPath}/frame-%04d.png`)  // Save frames with a numeric index
+            .on('end', () => {
+                console.log('Frames extracted successfully');
+                resolve();
+            })
+            .on('error', (err) => {
+                console.error('Error during frame extraction:', err);
+                reject(err);
+            })
+            .run();
     });
+}
+
+export async function calc_avg(frameOutputPath, extractProperty) {
+    let frames = fs.readdirSync(frameOutputPath);
+    let totalProperty = 0;
+    let frameCount = 0;
+
+    for (let frame of frames) {
+        const framePath = path.join(frameOutputPath, frame);
+        if (fs.existsSync(framePath)) {
+            try {
+                let propertyValue = await extractProperty(framePath);
+                totalProperty += propertyValue;
+                frameCount++;
+            } catch (error) {
+                continue;  // Skip this frame and continue with the next
+            }
+        } else {
+            console.error('Missing frame:', framePath);
+        }
+    }
+
+    if (frameCount === 0) {
+        throw new Error(`No frames were processed for property calculation.`);
+    }
+
+    let averageProperty = totalProperty / frameCount;
+    // console.log(`Average: ${averageProperty}`);
+    return averageProperty;
 }

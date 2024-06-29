@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { extract_brightness, extract_temperature, extract_contrast, extractFrameBrightness } from './video.js';
+import { extract_brightness, extractFrames, calc_avg, extract_contrast, extract_temperature } from './video.js';
 import { extract_bpm, extract_loudness, processAudio } from "./audio.js";
 
 const PORT = 3000;
@@ -18,9 +18,10 @@ app.post(
         const imagePath = req.files["screenshot"][0].path;
         const audioPath = req.files["audio"][0].path;
 
-        const brightness = await extractFrameBrightness(imagePath, 'uploads');
-        const contrast = await extract_contrast(imagePath);
-        const temperature = await extract_temperature(imagePath);
+        await extractFrames(imagePath, 'uploads')
+        const brightness =  await calc_avg('uploads', extract_brightness);
+        const contrast =  await calc_avg('uploads', extract_contrast);
+        const temperature =  await calc_avg('uploads', extract_temperature);
 
         const audioVec = processAudio(audioPath);
         const loudness = extract_loudness(audioVec);
