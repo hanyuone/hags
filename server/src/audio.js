@@ -16,13 +16,23 @@ export function processAudio(audioPath) {
 }
 
 export function extract_loudness(audioVec) {
-    const decibels = 20 * Math.log10(1.0 / essentia.RMS(audioVec).rms);
-    return decibels;
+    const rms = essentia.RMS(audioVec).rms;
+
+    // Assuming benchmark is 90dB, we want to reduce our volume by 10dB to reach "safe" levels.
+    // Thus, anything below a -0.5 is safe, and anything above that is dangerous.
+    const logAverage = Math.log10(rms);
+
+    if (logAverage < -0.5) {
+        return 1;
+    }
+
+    return 1 + (logAverage * 2);
 }
 
 export function extract_bpm(audioVec) {
     const beats = essentia.RhythmExtractor(audioVec);
     const over = beats.bpm - 92;
 
+    // Every 10 BPM over the default of 92 halves the final score
     return 1 / (2 ** (over / 10));
 }
