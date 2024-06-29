@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import color from 'color-temperature';
 
 export async function extract_brightness(imagePath) {
     const image = sharp(imagePath);
@@ -21,6 +22,18 @@ export async function extract_brightness(imagePath) {
     // Calculate average luminance
     let averageLuminance = totalLuminance / pixelCount;
     return averageLuminance;
+}
+
+export async function extract_temperature(imagePath) {
+    const image = sharp(imagePath).resize(1,1);
+
+    const { data } = await image
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+
+    const rgb = [data[0], data[1], data[2]].map(value => value / 255);   
+    const kelvin = color.rgb2colorTemperature(rgb);
+    return kelvin;
 }
 
 
