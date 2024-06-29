@@ -8,28 +8,23 @@ import {
   CardFooter,
 } from '../components/ui/card';
 import CognitiveInsights from '../components/ui/cognitive-insights';
-import Footer from '../components/ui/footer';
-import { data1, data2, x, y, value } from '../lib/data';
+import { data1, data2, x, y } from '../lib/data';
 import { useNavigate } from 'react-router-dom';
-import {
-  VisSingleContainer,
-  VisDonut,
-  VisTooltip,
-  VisBulletLegend,
-} from '@unovis/react';
-import { Donut } from '@unovis/ts';
 import AppBreakdown from '../components/ui/app-breakdown';
+import AggregateBreakdown from '../components/ui/aggregate-breakdown';
+import { useEffect } from 'react';
 
 const Insights = () => {
-  const triggers = { [Donut.selectors.segment]: (d: any) => d.data }; // TODO: this is what is in the docs (clown emoji)
   const navigate = useNavigate();
-  const colors = ['red', 'blue', 'green'];
-  const items = data2.map((data, i) => ({ name: data, color: colors[i] }));
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
       <h2 className='text-white text-4xl font-semibold'>Cognitive Insights</h2>
-      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>1250</CardTitle>
           <CardDescription className='text-white font-semibold w-3/4 mx-auto'>
@@ -39,13 +34,8 @@ const Insights = () => {
         <CardContent>
           <CognitiveInsights data={data1} x={x} y={y} />
         </CardContent>
-        <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'>
-            Details
-          </Button>
-        </CardFooter>
       </Card>
-      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>
             Aggregate Analysis
@@ -80,26 +70,20 @@ const Insights = () => {
           </Button>
         </CardFooter>
       </Card>
-      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>
             Aggregate Breakdown
           </CardTitle>
         </CardHeader>
         <CardContent className='text-white text-left'>
-          <VisSingleContainer data={data2}>
-            <VisDonut arcWidth={0} value={value} />
-            <VisTooltip triggers={triggers} />
-          </VisSingleContainer>
-          <div className='flex items-center justify-center'>
-            <VisBulletLegend items={items} />
-          </div>
+          <AggregateBreakdown data={data2} />
         </CardContent>
       </Card>
       <h2 className='text-white text-4xl font-semibold my-10'>
         Average Cognitive Load Index
       </h2>
-      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardDescription className='text-white font-semibold'>
             Application breakdown
@@ -111,30 +95,19 @@ const Insights = () => {
         <CardContent>
           <AppBreakdown data={data1} x={x} y={y} />
         </CardContent>
-        <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill' onClick={() => navigate('/insights')}>
-            Details
-          </Button>
-        </CardFooter>
       </Card>
-      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>
             Average Breakdown
           </CardTitle>
         </CardHeader>
         <CardContent className='text-white text-left'>
-          <VisSingleContainer data={data2}>
-            <VisDonut arcWidth={0} value={value} />
-            <VisTooltip triggers={triggers} />
-          </VisSingleContainer>
-          <div className='flex items-center justify-center'>
-            <VisBulletLegend items={items} />
-          </div>
+          <AggregateBreakdown data={data2} />
         </CardContent>
       </Card>
       <h2 className='text-white text-4xl font-semibold my-10'>Actionables</h2>
-      <Card className='w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardDescription className='text-white font-semibold'>
             Disclaimer: these are only suggested actionables.
@@ -170,14 +143,6 @@ const Insights = () => {
           </p>
         </CardContent>
       </Card>
-      {/* TODO: implement */}
-      <Button
-        className='text-button bg-button-fill font-bold px-10 mt-5 hover:bg-button-fill'
-        onClick={() => navigate('/')}
-      >
-        Download summary report
-      </Button>
-      <Footer />
     </div>
   );
 };

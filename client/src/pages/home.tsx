@@ -1,4 +1,3 @@
-import Footer from '../components/ui/footer';
 import { Alert, AlertDescription } from '../components/ui/alert';
 import { Info } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -15,21 +14,16 @@ import CognitiveInsights from '../components/ui/cognitive-insights';
 import AppBreakdown from '../components/ui/app-breakdown';
 import { data1, x, y } from '../lib/data';
 import { useNavigate } from 'react-router-dom';
-import {
-  useQuery,
-} from '@tanstack/react-query'
+import { useEffect } from 'react';
+import { useToast } from '../components/ui/use-toast';
 
 export default function Home() {
+  const { toast } = useToast();
   const navigate = useNavigate();
-  const { data } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('https://api.github.com/repos/TanStack/query').then((res) =>
-        res.json(),
-      ),
-  })
 
-  console.log(data.topics);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
@@ -51,10 +45,18 @@ export default function Home() {
           </label>
         </div>
       </div>
-      <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'>
+      <Button
+        className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'
+        onClick={() => {
+          toast({
+            title: 'Session successfully has been reset',
+          });
+          localStorage.clear();
+        }}
+      >
         Reset my session
       </Button>
-      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>1250</CardTitle>
           <CardDescription className='text-white font-semibold w-3/4 mx-auto'>
@@ -62,15 +64,18 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-        <CognitiveInsights data={data1} x={x} y={y} />
+          <CognitiveInsights data={data1} x={x} y={y} />
         </CardContent>
         <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill' onClick={() => navigate('/insights')}>
+          <Button
+            className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'
+            onClick={() => navigate('/insights')}
+          >
             Details
           </Button>
         </CardFooter>
       </Card>
-      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardDescription className='text-white font-semibold'>
             Application breakdown
@@ -83,12 +88,14 @@ export default function Home() {
           <AppBreakdown data={data1} x={x} y={y} />
         </CardContent>
         <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill' onClick={() => navigate('/insights')}>
+          <Button
+            className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'
+            onClick={() => navigate('/insights')}
+          >
             Details
           </Button>
         </CardFooter>
       </Card>
-      <Footer />
     </div>
   );
 }

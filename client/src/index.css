@@ -8,3 +8,12 @@
     src: url("../assets/ReadexPro-VariableFont_HEXP,wght.ttf") format("ttf");
   }
 }
+
+:root {
+  --vis-color0: #A7B1FF;
+  --vis-color1: #FFF1F0;
+  --vis-color2: #FFB05C;
+  --vis-color3: #4F5795;
+  --vis-color4: #78D7FF;
+  --vis-color5: #156ACD;
+}

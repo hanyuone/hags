@@ -8,3 +8,7 @@ export type GraphProps = {
   x: (data: Data) => number,
   y: (data: Data) => number
 }
+
+export type AggregateBreakdownProps = {
+  data: number[]
+}
