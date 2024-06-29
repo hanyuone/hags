@@ -10,3 +10,4 @@
     [] goofy switches
     [X] goofy inputs
     [X] goofy cards
+[] setup react query

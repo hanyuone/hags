@@ -15,9 +15,21 @@ import CognitiveInsights from '../components/ui/cognitive-insights';
 import AppBreakdown from '../components/ui/app-breakdown';
 import { data1, x, y } from '../lib/data';
 import { useNavigate } from 'react-router-dom';
+import {
+  useQuery,
+} from '@tanstack/react-query'
 
 export default function Home() {
   const navigate = useNavigate();
+  const { data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () =>
+      fetch('https://api.github.com/repos/TanStack/query').then((res) =>
+        res.json(),
+      ),
+  })
+
+  console.log(data.topics);
 
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
