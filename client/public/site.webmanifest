@@ -1,0 +1,37 @@
+{
+    "name": "Unclutter",
+    "short_name": "Unclutter",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#B1B9F8",
+    "description": "TBA",
+    "icons": [
+      {
+        "src": "/icons/favicon-16x16.png",
+        "type": "image/png",
+        "sizes": "16x16"
+      }, 
+      {
+        "src": "/icons/favicon-32x32.png",
+        "type": "image/png",
+        "sizes": "32x32"
+      },
+      {
+        "src": "/icons/apple-touch-icon.png",
+        "type": "image/png",
+        "sizes": "180x180"
+      },
+      {
+        "src": "/icons/android-chrome-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/icons/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
