@@ -20,7 +20,6 @@ const parseLabel = (d: number) => {
 }
 
 const AggregateBreakdown = ({ data }: AggregateBreakdownProps) => {
-  console.log(data);
   const items = data.map((d, i) => ({ name: parseLabel(d), color: colours[i] }));
 
   return (

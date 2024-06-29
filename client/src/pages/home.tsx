@@ -55,24 +55,29 @@ export default function Home() {
           </label>
         </div>
       </div>
-      <Button
-        className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'
-        onClick={() => {
-          toast({
-            title: 'Session successfully has been reset',
-          });
-          localStorage.clear();
-        }}
-      >
-        Reset my session
-      </Button>
+      <div className="flex flex-row gap-2">
+        <Button className='text-button bg-button-fill font-bold px-4 hover:bg-button-fill'>
+          Upload video or image
+        </Button>
+        <Button
+          className='text-white bg-slate-700 font-bold px-4 hover:bg-slate-700'
+          onClick={() => {
+            toast({
+              title: 'Session successfully has been n',
+            });
+            localStorage.clear();
+          }}
+        >
+          Reset my session
+        </Button>
+      </div>
       <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>0.785</CardTitle>
           <CardDescription className='text-white font-semibold w-3/4 mx-auto'>
             Your current aggregate cognitive index score
           </CardDescription>
-          <Badge className='bg-slate-500 text-white'>
+          <Badge className='bg-slate-500 text-white hover:bg-slate-500'>
             The average aggregate cognitive index score is 0.5
           </Badge>
         </CardHeader>
