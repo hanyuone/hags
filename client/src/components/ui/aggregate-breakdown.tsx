@@ -1,18 +1,32 @@
-import { VisSingleContainer, VisDonut, VisTooltip, VisBulletLegend } from "@unovis/react";
+import { VisSingleContainer, VisDonut, VisBulletLegend } from "@unovis/react";
 import { value } from "../../lib/data";
-import { Donut } from '@unovis/ts';
 import { colours } from "../../lib/data";
 import { AggregateBreakdownProps } from "../../lib/types";
 
+const parseLabel = (d: number) => {
+  if (d === 12) {
+    return "Audio (12%)"
+  } else if (d === 19) {
+    return "High colour contrast (19%)"
+  } else if (d === 10) {
+    return "Motion (10%)"
+  } else if (d === 13) {
+    return "Brightness (13%)"
+  } else if (d === 24) {
+    return "Small font size (24%)"
+  } else if (d === 23) {
+    return "Colour temperature (23%)"
+  }
+}
+
 const AggregateBreakdown = ({ data }: AggregateBreakdownProps) => {
-  const triggers = { [Donut.selectors.segment]: (d: any) => d.data }; // TODO: this is what is in the docs (clown emoji)
-  const items = data.map((d, i) => ({ name: d, color: colours[i] }));
+  console.log(data);
+  const items = data.map((d, i) => ({ name: parseLabel(d), color: colours[i] }));
 
   return (
     <div>
       <VisSingleContainer data={data}>
         <VisDonut arcWidth={0} value={value} />
-        <VisTooltip triggers={triggers} />
       </VisSingleContainer>
       <div className='flex items-center justify-center text-center mt-4'>
         <VisBulletLegend items={items} className="text-white" />

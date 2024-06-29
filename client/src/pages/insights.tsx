@@ -8,19 +8,28 @@ import {
   CardFooter,
 } from '../components/ui/card';
 import CognitiveInsights from '../components/ui/cognitive-insights';
-import { data1, data2, x, y } from '../lib/data';
+import {
+  appBreakdownData,
+  appBreakdownX,
+  appBreakdownY,
+  cogInsightX,
+  cogInsights,
+  cogInsightY,
+  aggregateBreakdown,
+} from '../lib/data';
 import { useNavigate } from 'react-router-dom';
 import AppBreakdown from '../components/ui/app-breakdown';
 import AggregateBreakdown from '../components/ui/aggregate-breakdown';
 import { useEffect } from 'react';
+import { Badge } from '../components/ui/badge';
 import Logo from '../components/ui/logo';
 
 const Insights = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
@@ -28,13 +37,20 @@ const Insights = () => {
       <h2 className='text-white text-4xl font-semibold'>Cognitive Insights</h2>
       <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
-          <CardTitle className='text-white text-4xl font-bold'>1250</CardTitle>
+          <CardTitle className='text-white text-4xl font-bold'>0.785</CardTitle>
           <CardDescription className='text-white font-semibold w-3/4 mx-auto'>
             Your current aggregate cognitive index score
           </CardDescription>
+          <Badge className='bg-slate-500 hover:bg-slate-500 text-white'>
+            The average aggregate cognitive index score is 0.5
+          </Badge>
         </CardHeader>
         <CardContent>
-          <CognitiveInsights data={data1} x={x} y={y} />
+          <CognitiveInsights
+            data={cogInsights}
+            x={cogInsightX}
+            y={cogInsightY}
+          />
         </CardContent>
       </Card>
       <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
@@ -79,7 +95,9 @@ const Insights = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className='text-white text-left'>
-          <AggregateBreakdown data={data2} />
+          <AggregateBreakdown
+            data={aggregateBreakdown}
+          />
         </CardContent>
       </Card>
       <h2 className='text-white text-4xl font-semibold my-10'>
@@ -95,7 +113,11 @@ const Insights = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <AppBreakdown data={data1} x={x} y={y} />
+          <AppBreakdown
+            data={appBreakdownData}
+            x={appBreakdownX}
+            y={appBreakdownY}
+          />
         </CardContent>
       </Card>
       <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
@@ -105,7 +127,9 @@ const Insights = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className='text-white text-left'>
-          <AggregateBreakdown data={data2} />
+          <AggregateBreakdown
+            data={aggregateBreakdown}
+          />
         </CardContent>
       </Card>
       <h2 className='text-white text-4xl font-semibold my-10'>Actionables</h2>

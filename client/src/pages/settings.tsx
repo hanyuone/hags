@@ -6,21 +6,6 @@ import { useEffect, useState } from 'react';
 import { useToast } from '../components/ui/use-toast';
 import Logo from '../components/ui/logo';
 
-// {
-//   individualCogLoadIdxCap: 1250,
-//   aggregateCogLoadIdxCap: 10250,
-//   isAudioDetect: true,
-//   isHighColourContrast: true,
-//   isMotionDetection: false,
-//   isBrightnessLevel: false,
-//   isSmallFontSize: true,
-//   isColourTemp: true,
-//   isIdvCogLoadIdxNotif: true,
-//   isAggregateCogLoadIdxCapNotif: true,
-//   isTiktok: false,
-//   isInstagram: false
-// }
-
 const Settings = () => {
   const [individualCogLoadIdxCap, setIndividualCogLoadIdxCap] = useState(0);
   const [aggregateCogLoadIdxCap, setAggregateCogLoadIdxCap] = useState(0);

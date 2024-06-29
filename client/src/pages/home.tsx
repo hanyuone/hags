@@ -12,11 +12,19 @@ import {
 } from '../components/ui/card';
 import CognitiveInsights from '../components/ui/cognitive-insights';
 import AppBreakdown from '../components/ui/app-breakdown';
-import { data1, x, y } from '../lib/data';
+import {
+  appBreakdownData,
+  appBreakdownX,
+  appBreakdownY,
+  cogInsightX,
+  cogInsightY,
+  cogInsights,
+} from '../lib/data';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useToast } from '../components/ui/use-toast';
 import Logo from '../components/ui/logo';
+import { Badge } from '../components/ui/badge';
 
 export default function Home() {
   const { toast } = useToast();
@@ -60,13 +68,20 @@ export default function Home() {
       </Button>
       <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
-          <CardTitle className='text-white text-4xl font-bold'>1250</CardTitle>
+          <CardTitle className='text-white text-4xl font-bold'>0.785</CardTitle>
           <CardDescription className='text-white font-semibold w-3/4 mx-auto'>
             Your current aggregate cognitive index score
           </CardDescription>
+          <Badge className='bg-slate-500 text-white'>
+            The average aggregate cognitive index score is 0.5
+          </Badge>
         </CardHeader>
         <CardContent>
-          <CognitiveInsights data={data1} x={x} y={y} />
+          <CognitiveInsights
+            data={cogInsights}
+            x={cogInsightX}
+            y={cogInsightY}
+          />
         </CardContent>
         <CardFooter>
           <Button
@@ -87,7 +102,11 @@ export default function Home() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <AppBreakdown data={data1} x={x} y={y} />
+          <AppBreakdown
+            data={appBreakdownData}
+            x={appBreakdownX}
+            y={appBreakdownY}
+          />
         </CardContent>
         <CardFooter>
           <Button
