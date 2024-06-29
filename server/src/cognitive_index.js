@@ -1,21 +1,27 @@
-function rgbToHsv(r, g, b) {
-    r /= 255, g /= 255, b /= 255;
-    let max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h, s, v = max;
+import sharp from 'sharp';
 
-    let d = max - min;
-    s = max == 0 ? 0 : d / max;
+export async function extract_brightness(imagePath) {
+    const image = sharp(imagePath);
+    const { data, info } = await image
+        .raw()
+        .toBuffer({ resolveWithObject: true });
 
-    if (max == min) {
-        h = 0;
-    } else {
-        switch (max) {
-            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - r) / d + 2; break;
-            case b: h = (r - g) / d + 4; break;
-        }
-        h /= 6;
+    let totalLuminance = 0;
+    let pixelCount = info.width * info.height; // Total number of pixels
+
+    for (let i = 0; i < data.length; i += info.channels) {
+        let r = data[i] / 255;
+        let g = data[i + 1] / 255;
+        let b = data[i + 2] / 255;
+        // Calculate luminance for each pixel
+        let luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        totalLuminance += luminance;
     }
 
-    return [h, s, v];
+    // Calculate average luminance
+    let averageLuminance = totalLuminance / pixelCount;
+    return averageLuminance;
 }
+
+
+
