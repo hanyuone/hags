@@ -1,6 +1,12 @@
 import sharp from 'sharp';
 import color from 'color-temperature';
 import { extractColors } from 'extract-colors';
+import ffmpeg from 'fluent-ffmpeg'
+import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
+import fs from 'fs';
+import path from 'path';
+
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
 // As defined in https://www.w3.org/TR/WCAG/#dfn-contrast-ratio
 function luminanceClamp(colour) {
@@ -21,27 +27,29 @@ function relativeLuminance(r, g, b) {
     return 0.2126 * rClamp + 0.7152 * gClamp + 0.0722 * bClamp;
 }
 
-export async function extract_brightness(imagePath) {
-    const image = sharp(imagePath);
-    const { data, info } = await image
-        .raw()
-        .toBuffer({ resolveWithObject: true });
+export async function extract_brightness(chunk) {
+    try {
+        const image = sharp(chunk);
+        const { data, info } = await image.raw().toBuffer({ resolveWithObject: true });
 
-    let totalLuminance = 0;
-    let pixelCount = info.width * info.height; // Total number of pixels
+        let totalLuminance = 0;
+        let pixelCount = info.width * info.height; // Total number of pixels
 
-    for (let i = 0; i < data.length; i += info.channels) {
-        let r = data[i] / 255;
-        let g = data[i + 1] / 255;
-        let b = data[i + 2] / 255;
-        // Calculate luminance for each pixel
-        let luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        totalLuminance += luminance;
+        for (let i = 0; i < data.length; i += info.channels) {
+            let r = data[i] / 255;
+            let g = data[i + 1] / 255;
+            let b = data[i + 2] / 255;
+            // Calculate luminance for each pixel
+            let luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            totalLuminance += luminance;
+        }
+
+        // Calculate average luminance
+        let averageLuminance = totalLuminance / pixelCount;
+        return averageLuminance;
+    } catch (err) {
+        throw err;
     }
-
-    // Calculate average luminance
-    let averageLuminance = totalLuminance / pixelCount;
-    return averageLuminance;
 }
 
 export async function extract_temperature(imagePath) {
@@ -55,7 +63,6 @@ export async function extract_temperature(imagePath) {
     const kelvin = color.rgb2colorTemperature(rgb);
     return kelvin;
 }
-
 
 export async function getContrast(imagePath) {
     const image = sharp(imagePath);
@@ -92,4 +99,38 @@ export async function getContrast(imagePath) {
     } else {
         return ratio / 4.5;
     }
+}
+
+export async function extractFrameBrightness(videoPath, frameOutputPath) {
+    ffmpeg.setFfmpegPath(ffmpegInstaller.path);
+    let totalBrightness = 0;
+    let frameCount = 0;
+
+    return new Promise((resolve, reject) => {
+        ffmpeg(videoPath)
+        .outputOptions(['-vf fps=1'])
+        .output(`${frameOutputPath}/%d.png`)
+        .on('end', async function() {
+            let frames = fs.readdirSync(frameOutputPath);
+            let totalBrightness = 0;
+            for (let frame of frames) {
+                const framePath = path.join(frameOutputPath, frame);
+                if (fs.existsSync(framePath)) {
+                    try {
+                        let brightness = await extract_brightness(framePath);
+                        totalBrightness += brightness;
+                        frameCount++;
+                    } catch (error) {
+                        continue;
+                    }
+                } else {
+                    console.error('Missing frame:', framePath);
+                }
+            }
+            let averageBrightness = totalBrightness / frames.length;
+            console.log(`Average Brightness: ${averageBrightness}`);
+            resolve(averageBrightness);
+        })
+        .run();
+    });
 }
