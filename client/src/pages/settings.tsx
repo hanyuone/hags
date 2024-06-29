@@ -13,22 +13,22 @@ const Settings = () => {
         <h3 className='text-lg font-medium mt-3'>
           Individual cognitive load index cap
         </h3>
-        <div className='flex flex-row my-4'>
+        <div className='flex flex-row my-4 gap-6'>
           <p className='font-normal text-sm'>
             You will receive a notification if the cognitive load index of an
             individual application reaches this number.
           </p>
-          <Input type='number' placeholder='1250' />
+          <Input type='number' className='text-black' placeholder='1,250' />
         </div>
         <h3 className='text-lg font-medium'>
           Individual cognitive load index cap
         </h3>
-        <div className='flex flex-row my-4'>
+        <div className='flex flex-row my-4 gap-6'>
           <p className='font-normal text-sm'>
             You will receive a notification if the cognitive load index of an
             individual application reaches this number.
           </p>
-          <Input type='number' placeholder='1250' />
+          <Input type='number' className='text-black' placeholder='10,250' />
         </div>
       </div>
       <div className='flex flex-col mt-4 w-3/4 lg:w-4/5'>
@@ -37,9 +37,7 @@ const Settings = () => {
         </h2>
         <div className='flex flex-row my-4 align-text-bottom justify-between'>
           <h3 className='text-lg font-medium'>Enable audio detection</h3>
-          <Switch
-            className='bg-white'
-          />
+          <Switch className='bg-white' />
         </div>
         <p className='font-normal text-sm'>
           Noise pollution can significantly increase cognitive load by creating
@@ -108,7 +106,9 @@ const Settings = () => {
           <h3 className='text-lg font-medium'>
             Enable colour temperature detection
           </h3>
-          <Switch className='bg-white' />
+          <Switch
+            className='bg-white'
+          />
         </div>
         <p className='font-normal text-sm'>
           Extreme colour temperatures (too warm or too cool) can affect visual
@@ -148,7 +148,7 @@ const Settings = () => {
             calculated when the user is on the specific applications:
           </p>
           <div className='flex flex-col gap-4 mt-2'>
-            <div className='flex items-center space-x-2'>
+            <div className='flex items-center space-x-2 mt-2 mb-2'>
               <Checkbox id='terms1' color='#FFF' className='border-white' />
               <div className='grid gap-1.5 leading-none'>
                 <label
@@ -170,7 +170,7 @@ const Settings = () => {
                 </label>
               </div>
             </div>
-            <Button className='text-button bg-button-fill font-bold px-10'>
+            <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'>
               Delete all session data
             </Button>
           </div>

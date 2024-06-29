@@ -39,10 +39,10 @@ export default function Home() {
           </label>
         </div>
       </div>
-      <Button className='text-button bg-button-fill font-bold px-10'>
+      <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'>
         Reset my session
       </Button>
-      <Card className='mt-5 w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>1250</CardTitle>
           <CardDescription className='text-white font-semibold w-3/4 mx-auto'>
@@ -53,12 +53,12 @@ export default function Home() {
         <CognitiveInsights data={data1} x={x} y={y} />
         </CardContent>
         <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10' onClick={() => navigate('/insights')}>
+          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill' onClick={() => navigate('/insights')}>
             Details
           </Button>
         </CardFooter>
       </Card>
-      <Card className='mt-5 w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardDescription className='text-white font-semibold'>
             Application breakdown
@@ -71,7 +71,7 @@ export default function Home() {
           <AppBreakdown data={data1} x={x} y={y} />
         </CardContent>
         <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10' onClick={() => navigate('/insights')}>
+          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill' onClick={() => navigate('/insights')}>
             Details
           </Button>
         </CardFooter>

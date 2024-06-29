@@ -29,7 +29,7 @@ const Insights = () => {
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
       <h2 className='text-white text-4xl font-semibold'>Cognitive Insights</h2>
-      <Card className='mt-5 w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>1250</CardTitle>
           <CardDescription className='text-white font-semibold w-3/4 mx-auto'>
@@ -40,12 +40,12 @@ const Insights = () => {
           <CognitiveInsights data={data1} x={x} y={y} />
         </CardContent>
         <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10'>
+          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'>
             Details
           </Button>
         </CardFooter>
       </Card>
-      <Card className='mt-5 w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>
             Aggregate Analysis
@@ -73,14 +73,14 @@ const Insights = () => {
         </CardContent>
         <CardFooter>
           <Button
-            className='text-button bg-button-fill font-bold px-10'
+            className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill'
             onClick={() => navigate('/')}
           >
             See actionables
           </Button>
         </CardFooter>
       </Card>
-      <Card className='mt-5 w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>
             Aggregate Breakdown
@@ -99,7 +99,7 @@ const Insights = () => {
       <h2 className='text-white text-4xl font-semibold my-10'>
         Average Cognitive Load Index
       </h2>
-      <Card className='mt-5 w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardDescription className='text-white font-semibold'>
             Application breakdown
@@ -112,12 +112,12 @@ const Insights = () => {
           <AppBreakdown data={data1} x={x} y={y} />
         </CardContent>
         <CardFooter>
-          <Button className='text-button bg-button-fill font-bold px-10' onClick={() => navigate('/insights')}>
+          <Button className='text-button bg-button-fill font-bold px-10 hover:bg-button-fill' onClick={() => navigate('/insights')}>
             Details
           </Button>
         </CardFooter>
       </Card>
-      <Card className='mt-5 w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='mt-5 w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardTitle className='text-white text-4xl font-bold'>
             Average Breakdown
@@ -133,9 +133,8 @@ const Insights = () => {
           </div>
         </CardContent>
       </Card>
-
       <h2 className='text-white text-4xl font-semibold my-10'>Actionables</h2>
-      <Card className='w-5/6 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
+      <Card className='w-4/5 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
           <CardDescription className='text-white font-semibold'>
             Disclaimer: these are only suggested actionables.
@@ -173,7 +172,7 @@ const Insights = () => {
       </Card>
       {/* TODO: implement */}
       <Button
-        className='text-button bg-button-fill font-bold px-10 mt-5'
+        className='text-button bg-button-fill font-bold px-10 mt-5 hover:bg-button-fill'
         onClick={() => navigate('/')}
       >
         Download summary report
