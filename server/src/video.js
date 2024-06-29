@@ -64,7 +64,8 @@ export async function extract_temperature(imagePath) {
     return kelvin;
 }
 
-export async function getContrast(imagePath) {
+
+export async function extract_contrast(imagePath) {
     const image = sharp(imagePath);
     const { data: buffer, info } = await image
         .raw()
@@ -100,6 +101,7 @@ export async function getContrast(imagePath) {
         return ratio / 4.5;
     }
 }
+
 
 export async function extractFrameBrightness(videoPath, frameOutputPath) {
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
