@@ -9,11 +9,12 @@
     }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./client",
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    }
-  }
+    },
+    "allowSyntheticDefaultImports": true
+  },
 }

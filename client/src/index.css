@@ -1,4 +1,10 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "ReadexPro";
+    src: url("../assets/ReadexPro-VariableFont_HEXP,wght.ttf") format("ttf");
+  }
+}
