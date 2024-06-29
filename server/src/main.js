@@ -2,6 +2,8 @@ import express from "express";
 import multer from "multer";
 import { extract_brightness } from './cognitive_index.js';
 
+import cv from "./lib/opencv";
+
 const PORT = 3000;
 const UPLOAD_PATH = "uploads/";
 
