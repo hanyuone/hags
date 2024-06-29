@@ -16,6 +16,7 @@ import { data1, x, y } from '../lib/data';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useToast } from '../components/ui/use-toast';
+import Logo from '../components/ui/logo';
 
 export default function Home() {
   const { toast } = useToast();
@@ -27,6 +28,7 @@ export default function Home() {
 
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
+      <Logo />
       <h1 className='text-white text-4xl font-semibold'>Welcome Joanna</h1>
       <Alert className='w-3/4 lg:w-1/3 mt-4 bg-alert-fill border-alert-border'>
         <Info className='h-4 w-4' />

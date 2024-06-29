@@ -4,6 +4,7 @@ import { Button } from '../components/ui/button';
 import { Checkbox } from '../components/ui/checkbox';
 import { useEffect, useState } from 'react';
 import { useToast } from '../components/ui/use-toast';
+import Logo from '../components/ui/logo';
 
 // {
 //   individualCogLoadIdxCap: 1250,
@@ -43,6 +44,7 @@ const Settings = () => {
 
   return (
     <div className='bg-main min-h-screen text-left flex flex-col items-center justify-center pt-10 pb-20 text-white'>
+      <Logo />
       <h1 className='text-4xl font-semibold'>Settings</h1>
       <div className='flex flex-col mt-4 w-3/4 lg:w-4/5'>
         <h2 className='text-2xl font-medium'>Modifying caps</h2>

@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import AppBreakdown from '../components/ui/app-breakdown';
 import AggregateBreakdown from '../components/ui/aggregate-breakdown';
 import { useEffect } from 'react';
+import Logo from '../components/ui/logo';
 
 const Insights = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Insights = () => {
 
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
+      <Logo />
       <h2 className='text-white text-4xl font-semibold'>Cognitive Insights</h2>
       <Card className='mt-5 w-11/12 lg:w-1/3 bg-card-fill border-none flex flex-col items-center justify-center text-center shadow-card'>
         <CardHeader>
