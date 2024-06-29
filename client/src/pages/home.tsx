@@ -63,7 +63,7 @@ export default function Home() {
           className='text-white bg-slate-700 font-bold px-4 hover:bg-slate-700'
           onClick={() => {
             toast({
-              title: 'Session successfully has been n',
+              title: 'Session successfully has been reset',
             });
             localStorage.clear();
           }}
