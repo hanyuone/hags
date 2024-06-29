@@ -18,7 +18,6 @@ type DataRecord1 = {
   yAxisValue: number,
 };
 
-
 export default function Home() {
   const data: DataRecord1[] = [
     { xAxisValue: 1, yAxisValue: 23 },
@@ -32,7 +31,7 @@ export default function Home() {
 
   return (
     <div className='bg-main min-h-screen text-center flex flex-col items-center justify-center pt-10 pb-20'>
-      <h1 className='text-white text-4xl'>Welcome Joanna</h1>
+      <h1 className='text-white text-4xl font-semibold'>Welcome Joanna</h1>
       <Alert className='w-3/4 lg:w-1/3 mt-4 bg-alert-fill border-alert-border'>
         <Info className='h-4 w-4' />
         <AlertDescription className='text-black text-left'>

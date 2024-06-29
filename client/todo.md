@@ -2,6 +2,6 @@
     [X] footer
     [] 
 [] pages
-    [] home
+    [X] home
     [] settings
-    [] 
+    [] analytics
