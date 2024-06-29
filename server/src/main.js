@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { extract_brightness, extractFrames, calc_avg, extract_contrast, extract_temperature } from './video.js';
-import { extract_bpm, extract_loudness, processAudio } from "./audio.js";
+import { extractBpm, extractLoudness, processAudio } from "./audio.js";
 
 const PORT = 3000;
 
@@ -24,8 +24,8 @@ app.post(
         const temperature =  await calc_avg('uploads', extract_temperature);
 
         const audioVec = processAudio(audioPath);
-        const loudness = extract_loudness(audioVec);
-        const bpm = extract_bpm(audioVec);
+        const loudness = extractLoudness(audioVec);
+        const bpm = extractBpm(audioVec);
 
         res.send({
             "brightness": brightness,

@@ -15,7 +15,7 @@ export function processAudio(audioPath) {
     return audioDownMixed;
 }
 
-export function extract_loudness(audioVec) {
+export function extractLoudness(audioVec) {
     const rms = essentia.RMS(audioVec).rms;
 
     // Assuming benchmark is 90dB, we want to reduce our volume by 10dB to reach "safe" levels.
@@ -29,7 +29,7 @@ export function extract_loudness(audioVec) {
     return 1 + (logAverage * 2);
 }
 
-export function extract_bpm(audioVec) {
+export function extractBpm(audioVec) {
     const beats = essentia.RhythmExtractor(audioVec);
     const over = beats.bpm - 92;
 
