@@ -1,7 +1,6 @@
 import sharp from 'sharp';
 import color from 'color-temperature';
 import { extractColors } from 'extract-colors';
-import sharp from 'sharp'
 
 // As defined in https://www.w3.org/TR/WCAG/#dfn-contrast-ratio
 function luminanceClamp(colour) {
