@@ -57,9 +57,17 @@ export async function extract_temperature(imagePath) {
         .raw()
         .toBuffer({ resolveWithObject: true });
 
-    const rgb = [data[0], data[1], data[2]].map(value => value / 255);   
+    const rgb = [data[0], data[1], data[2]];   
     const kelvin = color.rgb2colorTemperature(rgb);
-    return kelvin;
+
+    // Calculate from range 2000 to 10000
+    if (kelvin < 2000) {
+        return 1;
+    } else if (kelvin > 10000) {
+        return 0;
+    } else {
+        return (10000 - kelvin) / 8000;
+    }
 }
 
 
@@ -100,13 +108,13 @@ export async function extract_contrast(imagePath) {
     }
 }
 
-export function extractFrames(videoPath, frameOutputPath) {
+export function extractFrames(videoPath) {
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
     return new Promise((resolve, reject) => {
         ffmpeg(videoPath)
             .outputOptions(['-vf fps=1'])  // Extract one frame per second
-            .output(`${frameOutputPath}/frame-%04d.png`)  // Save frames with a numeric index
+            .output(`${videoPath}-data/frame-%04d.png`)  // Save frames with a numeric index
             .on('end', () => {
                 console.log('Frames extracted successfully');
                 resolve();
