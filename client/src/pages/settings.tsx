@@ -7,8 +7,6 @@ import { useToast } from '../components/ui/use-toast';
 import Logo from '../components/ui/logo';
 
 const Settings = () => {
-  const [individualCogLoadIdxCap, setIndividualCogLoadIdxCap] = useState(0);
-  const [aggregateCogLoadIdxCap, setAggregateCogLoadIdxCap] = useState(0);
   const [isAudioDetect, setIsAudioDetect] = useState(false);
   const [isHighColourContrast, setIsHighColourContrast] = useState(false);
   const [isMotionDetection, setIsMotionDetection] = useState(false);
@@ -45,8 +43,7 @@ const Settings = () => {
             type='number'
             className='text-black'
             placeholder='1,250'
-            onChange={(e) => {
-              setIndividualCogLoadIdxCap(parseInt(e.target.value));
+            onChange={() => {
               toast({
                 title:
                   'Individual cognitive load index cap has been successfully updated',
@@ -66,8 +63,7 @@ const Settings = () => {
             type='number'
             className='text-black'
             placeholder='10,250'
-            onChange={(e) => {
-              setAggregateCogLoadIdxCap(parseInt(e.target.value));
+            onChange={() => {
               toast({
                 title:
                   'Aggregate cognitive load index cap has been successfully updated',

@@ -5,7 +5,7 @@ import Settings from './pages/settings';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Layout from './components/ui/layout';
 
-export default function App() {
+const App = () => {
   const queryClient = new QueryClient();
 
   return (
@@ -22,3 +22,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
