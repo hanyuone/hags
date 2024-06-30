@@ -22,5 +22,5 @@ export type AppBreakdown = {
 export type AppBreakdownProps = {
   data: AppBreakdown[],
   x: (data: AppBreakdown) => number,
-  y: (d: AppBreakdown) => number
+  y: ((d: AppBreakdown) => number)[]
 }

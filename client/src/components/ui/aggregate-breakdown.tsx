@@ -20,7 +20,7 @@ const parseLabel = (d: number) => {
 }
 
 const AggregateBreakdown = ({ data }: AggregateBreakdownProps) => {
-  const items = data.map((d, i) => ({ name: parseLabel(d), color: colours[i] }));
+  const items = data.map((d, i) => ({ name: parseLabel(d) || 'Default name', color: colours[i] }));
 
   return (
     <div>
@@ -28,7 +28,7 @@ const AggregateBreakdown = ({ data }: AggregateBreakdownProps) => {
         <VisDonut arcWidth={0} value={value} />
       </VisSingleContainer>
       <div className='flex items-center justify-center text-center mt-4'>
-        <VisBulletLegend items={items} className="text-white" />
+        <VisBulletLegend items={items} className="text-white" /> 
       </div>
     </div>
   )
